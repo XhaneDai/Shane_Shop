@@ -1,0 +1,88 @@
+﻿@model ShaneShop.RouteConfig
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+    <div ng-module="MainApp" ng-controller="MainCtrl as ctrl" style="padding-top: 50px">
+        <br />
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse">訂單查詢</a>
+                </h4>
+            </div>
+            <div id="collapse" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <form class="form-horizontal" role="form" action="@Url.Action("QueryOrderAPI", "Bank")" method="POST">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <md-input-container class="md-block">
+                                    <label>廠商編號</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           required="required"
+                                           name="CPNo"
+                                           maxlength="20"
+                                           value="EasonTest">
+                                </md-input-container>
+                            </div>
+                            <div class="col-md-12">
+                                <md-input-container class="md-block">
+                                    <label>藍新商店代碼</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           required="required"
+                                           name="MerchantNumber"
+                                           maxlength="20"
+                                           value="MS39385280">
+                                </md-input-container>
+                            </div>
+                            <div class="col-md-12">
+                                <md-input-container class="md-block">
+                                    <label>商店訂單編號</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           required="required"
+                                           name="OrgOrderNumber"
+                                           maxlength="20">
+                                </md-input-container>
+                            </div>
+                            <div class="col-md-12">
+                                <md-input-container class="md-block">
+                                    <label>訂單金額</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           required="required"
+                                           name="Amt">
+                                </md-input-container>
+                            </div>
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-success">
+                                    確定
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
