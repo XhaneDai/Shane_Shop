@@ -10,8 +10,7 @@ namespace ShaneShop.Controllers
 {
     public class OrdersController : BaseController
     {
-        // GET: Orders
-        public ActionResult Index()
+        public ActionResult ShoppingPage()
         {
             return View();
         }
