@@ -1,85 +1,106 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using AdoClass.DbUtil;
 
 // Assignment 6 .net
-public class SqlCommandDemo
+public class AdoCommand
 {
     // Declare Sql Conncetion and name it conn
     SqlConnection conn;
 
-    public SqlCommandDemo()
+    public string DBConnectionString = "";
+
+    public AdoCommand()
     {
-        // Instantiate the connection, had a lot of trouble with this, the string connection for the database was different then what was needed
         conn = new SqlConnection("Data Source = lugh4.it.nuigalway.ie; Initial Catalog = msdb2782; Persist Security Info = True; UID=msdb2782; Password = msdb2782JO");
+    }
+
+    public AdoCommand(string DBConnectionString)
+    {
+        this.DBConnectionString = DBConnectionString;
     }
 
     // call methods that demo SqlCommand capabilities
     static void Main()
     {
-        SqlCommandDemo scd = new SqlCommandDemo();
+        //SqlCommandDemo scd = new SqlCommandDemo();
 
-        Console.WriteLine();
-        Console.WriteLine("Customers Before Insert");
-        Console.WriteLine("------------------------");
-        Console.ReadKey();
-        // use ExecuteReader method
-        scd.ReadData();
+        //Console.WriteLine();
+        //Console.WriteLine("Customers Before Insert");
+        //Console.WriteLine("------------------------");
+        //Console.ReadKey();
+        //// use ExecuteReader method
+        //scd.ReadData();
 
-        //Insert method 
-        scd.Insertdata();
-        Console.WriteLine();
-        Console.WriteLine("Customers After Insert");
-        Console.WriteLine("------------------------------");
-        Console.ReadKey();
-        scd.ReadData();
+        ////Insert method 
+        //scd.Insertdata();
+        //Console.WriteLine();
+        //Console.WriteLine("Customers After Insert");
+        //Console.WriteLine("------------------------------");
+        //Console.ReadKey();
+        //scd.ReadData();
 
-        // Update method
-        scd.UpdateData();
+        //// Update method
+        //scd.UpdateData();
 
-        Console.WriteLine();
-        Console.WriteLine("Customers After Update");
-        Console.WriteLine("------------------------------");
-        Console.ReadKey();
-        scd.ReadData();
+        //Console.WriteLine();
+        //Console.WriteLine("Customers After Update");
+        //Console.WriteLine("------------------------------");
+        //Console.ReadKey();
+        //scd.ReadData();
 
-        //Delete method 
-        scd.DeleteData();
+        ////Delete method 
+        //scd.DeleteData();
 
-        Console.WriteLine();
-        Console.WriteLine("Customers After Delete");
-        Console.WriteLine("------------------------------");
-        Console.ReadKey();
-        scd.ReadData();
+        //Console.WriteLine();
+        //Console.WriteLine("Customers After Delete");
+        //Console.WriteLine("------------------------------");
+        //Console.ReadKey();
+        //scd.ReadData();
 
-        // use Count method
-        int numberOfRecords = scd.GetNumberOfRecords();
-        Console.ReadKey();
-        Console.WriteLine();
-        Console.WriteLine("Number of Records: {0}", numberOfRecords);
-        Console.ReadKey();
+        //// use Count method
+        //int numberOfRecords = scd.GetNumberOfRecords();
+        //Console.ReadKey();
+        //Console.WriteLine();
+        //Console.WriteLine("Number of Records: {0}", numberOfRecords);
+        //Console.ReadKey();
 
-        // use Count method
-        int meanOfItems = scd.GetmeanOfItems();
-        Console.ReadKey();
-        Console.WriteLine();
-        Console.WriteLine("Mean Of Shopping Basket: {0}c", meanOfItems);
-        Console.ReadKey();
+        //// use Count method
+        //int meanOfItems = scd.GetmeanOfItems();
+        //Console.ReadKey();
+        //Console.WriteLine();
+        //Console.WriteLine("Mean Of Shopping Basket: {0}c", meanOfItems);
+        //Console.ReadKey();
 
-        // use Min method
-        int minOfItems = scd.GetMinOfItems();
-        Console.ReadKey();
-        Console.WriteLine();
-        Console.WriteLine("Minimum Price Of Shopping Basket: {0}c", minOfItems);
-        Console.ReadKey();
+        //// use Min method
+        //int minOfItems = scd.GetMinOfItems();
+        //Console.ReadKey();
+        //Console.WriteLine();
+        //Console.WriteLine("Minimum Price Of Shopping Basket: {0}c", minOfItems);
+        //Console.ReadKey();
 
-        // use Max method
-        int maxOfItems = scd.GetMaxOfItems();
-        Console.ReadKey();
-        Console.WriteLine();
-        Console.WriteLine("Maximum Price Of Shopping Basket: {0}c", maxOfItems);
-        Console.ReadKey();
+        //// use Max method
+        //int maxOfItems = scd.GetMaxOfItems();
+        //Console.ReadKey();
+        //Console.WriteLine();
+        //Console.WriteLine("Maximum Price Of Shopping Basket: {0}c", maxOfItems);
+        //Console.ReadKey();
     }
+
+    public List<VModel> GetOrderByOrderID<VModel>(string OrderID)
+    {
+        List<VModel> result = new List<VModel>();
+        ShaneDbUtil shaneDbUtil = new ShaneDbUtil(this.DBConnectionString);
+        string selSQL = "";
+
+        result = shaneDbUtil.Exec<VModel>(selSQL, new { OrderID });
+
+
+        return result;
+    }
+
 
     //Read Data
     public void ReadData()

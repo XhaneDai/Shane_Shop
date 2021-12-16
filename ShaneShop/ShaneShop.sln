@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31105.61
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShaneShop", "ShaneShop\ShaneShop.csproj", "{6A2EC364-C8E4-44BD-A8F2-1188217BC839}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdoClass", "..\..\ADO.Net-SQL-CRUD-Example\SqlCommandDemo\AdoClass.csproj", "{A29ADC28-CCD5-4674-B54E-6192644D566C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdoClass", "AdoClass\AdoClass.csproj", "{A29ADC28-CCD5-4674-B54E-6192644D566C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

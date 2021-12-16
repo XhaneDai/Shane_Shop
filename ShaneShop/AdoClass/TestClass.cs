@@ -14,7 +14,7 @@ using System.Data.SqlClient;
     [Test]
     public void checkIfMinOfItemsWorks()
     {
-        SqlCommandDemo scd = new SqlCommandDemo();
+        AdoCommand scd = new AdoCommand();
         int minOfItems = scd.GetMinOfItems();
         int expectedResult = 45;
         Assert.AreEqual(minOfItems, expectedResult);
@@ -23,7 +23,7 @@ using System.Data.SqlClient;
     [Test]
     public void checkIfMaxOfItemsWorks()
     {
-        SqlCommandDemo scd = new SqlCommandDemo();
+        AdoCommand scd = new AdoCommand();
         int maxOfItems = scd.GetMaxOfItems();
         int expectedResult = 100;
         Assert.AreEqual(maxOfItems, expectedResult);
@@ -35,7 +35,7 @@ using System.Data.SqlClient;
     [Test]
     public void checkIfCountRecordsWorks()
     {
-        SqlCommandDemo scd = new SqlCommandDemo();
+        AdoCommand scd = new AdoCommand();
         int numberOfRecords = scd.GetNumberOfRecords();
         int expectedResult = 11;
         Assert.AreEqual(numberOfRecords, expectedResult);
@@ -44,7 +44,7 @@ using System.Data.SqlClient;
     [Test]
         public void checkIfMeanOfItemsWorks()
         {
-        SqlCommandDemo scd = new SqlCommandDemo();
+        AdoCommand scd = new AdoCommand();
         int meanOfItems = scd.GetmeanOfItems();
         int expectedResult = 80;
         Assert.AreEqual(meanOfItems, expectedResult);
@@ -53,7 +53,7 @@ using System.Data.SqlClient;
     [Test]
     public void checkInsertRecordsWorks()
     {
-        SqlCommandDemo scd = new SqlCommandDemo();
+        AdoCommand scd = new AdoCommand();
         {
             SqlConnection conn;
             conn =
@@ -92,7 +92,7 @@ using System.Data.SqlClient;
     [Test]
     public void checkReadRecordsWorks()
     {
-        SqlCommandDemo scd = new SqlCommandDemo();
+        AdoCommand scd = new AdoCommand();
         {
             SqlDataReader rdr = null;
             SqlConnection conn;
