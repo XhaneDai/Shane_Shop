@@ -170,6 +170,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\Orders\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
@@ -186,7 +187,7 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\ADO.Net-SQL-CRUD-Example\SqlCommandDemo\AdoClass.csproj">
+    <ProjectReference Include="..\AdoClass\AdoClass.csproj">
       <Project>{a29adc28-ccd5-4674-b54e-6192644d566c}</Project>
       <Name>AdoClass</Name>
     </ProjectReference>

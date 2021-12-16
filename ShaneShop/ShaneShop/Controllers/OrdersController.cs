@@ -10,17 +10,12 @@ namespace ShaneShop.Controllers
 {
     public class OrdersController : BaseController
     {
-        // GET: Orders
-        public ActionResult Index()
-        {
-            return View();
-        }
 
         public ActionResult CreateOrders()
         {
             AdoCommand adoCommand = new AdoCommand(SqlConnectString);
             string OrderID = "10418";
-            var testConnect = adoCommand.GetOrderByOrderID(OrderID);
+            //var testConnect = adoCommand.GetOrderByOrderID(OrderID);
 
             return View();
         }
