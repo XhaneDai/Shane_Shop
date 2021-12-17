@@ -105,68 +105,68 @@ namespace AdoClass.DbUtil
             return dataTable;
         }
 
-        ///// <summary>
-        ///// 執行sql 不須回傳值
-        ///// </summary>
-        ///// <param name="sql"></param>
-        ///// <param name="param"></param>
-        //public int Exec(string sql, object param)
-        //{
-        //    var count = 0;
-        //    try
-        //    {
-        //        using (var conn = new SqlConnection(this.DBConnectionString))
-        //        {
-        //            using (var command = new SqlCommand(sql, conn))
-        //            {
-        //                conn.Open();
+        /// <summary>
+        /// 執行sql 不須回傳值
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="param"></param>
+        public int Exec(string sql, object param)
+        {
+            var count = 0;
+            try
+            {
+                using (var conn = new SqlConnection(this.DBConnectionString))
+                {
+                    using (var command = new SqlCommand(sql, conn))
+                    {
+                        conn.Open();
 
-        //                foreach (PropertyInfo propertyInfo in param.GetType().GetProperties())
-        //                {
-        //                    // do stuff here
-        //                    command.Parameters.AddWithValue($"@{propertyInfo.Name}", propertyInfo.GetValue(param, null));
-        //                }
+                        foreach (PropertyInfo propertyInfo in param.GetType().GetProperties())
+                        {
+                            // do stuff here
+                            command.Parameters.AddWithValue($"@{propertyInfo.Name}", propertyInfo.GetValue(param, null));
+                        }
 
-        //                count = command.ExecuteNonQuery();
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        //insightsUtil.WriteLog(sql, "Exec");
-        //        //insightsUtil.WriteLog(ex);
-        //    }
-        //    return count;
-        //}
+                        count = command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                //insightsUtil.WriteLog(sql, "Exec");
+                //insightsUtil.WriteLog(ex);
+            }
+            return count;
+        }
 
 
-        ///// <summary>
-        ///// 執行sql 不須回傳值
-        ///// </summary>
-        ///// <param name="sql"></param>
-        ///// <param name="param"></param>
-        //public int Exec(string sql)
-        //{
-        //    var count = 0;
-        //    try
-        //    {
-        //        using (var conn = new SqlConnection(this.DBConnectionString))
-        //        {
-        //            using (var command = new SqlCommand(sql, conn))
-        //            {
-        //                conn.Open();
+        /// <summary>
+        /// 執行sql 不須回傳值
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="param"></param>
+        public int Exec(string sql)
+        {
+            var count = 0;
+            try
+            {
+                using (var conn = new SqlConnection(this.DBConnectionString))
+                {
+                    using (var command = new SqlCommand(sql, conn))
+                    {
+                        conn.Open();
 
-        //                count = command.ExecuteNonQuery();
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        //insightsUtil.WriteLog(sql, "Exec");
-        //        //insightsUtil.WriteLog(ex);
-        //    }
-        //    return count;
-        //}
+                        count = command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                //insightsUtil.WriteLog(sql, "Exec");
+                //insightsUtil.WriteLog(ex);
+            }
+            return count;
+        }
 
 
         /// <summary>

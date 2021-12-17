@@ -24,26 +24,40 @@
         <div id="collapse" class="panel-collapse collapse in">
             <div class="panel-body">
 
-                <form class="form-horizontal" role="form" action="@Url.Action("getOPWqrcodeAPI", "Bank")" method="POST">
+                <form class="form-horizontal" role="form" action="@Url.Action("CreateOrders", "Orders")" method="POST">
                     <div class="row">
                         @*<div class="col-md-12">
-            <md-input-container>
-                <label>版本</label>
-                <md-select name="version" ng-model="version">
-                    <md-option value="v11" selected>v11</md-option>
-                    <md-option value="v10">v10</md-option>
-                </md-select>
+            <md-input-container class="md-block">
+                <label>會員ID</label>
+                <input type="text"
+                       class="form-control"
+                       required="required"
+                       name="CustomerID"
+                       maxlength="20"
+                       value="LAUGB"
+                       disabled="disabled">
             </md-input-container>
         </div>*@
                         <div class="col-md-12">
                             <md-input-container class="md-block">
-                                <label>訂購人姓名</label>
+                                <label>會員ID</label>
                                 <input type="text"
                                        class="form-control"
                                        required="required"
-                                       name="ShipName"
+                                       name="CustomerID"
                                        maxlength="20"
-                                       value="Shane">
+                                       value="LAUGB"
+                              />
+                            </md-input-container>
+                        </div>
+                        <div class="col-md-12">
+                            <md-input-container class="md-block">
+                                <label>寄送城市</label>
+                                <input type="text"
+                                       class="form-control"
+                                       name="ShipCity"
+                                       maxlength="20"
+                                       value="">
                             </md-input-container>
                         </div>
                         <div class="col-md-12">
@@ -51,7 +65,6 @@
                                 <label>寄送地址</label>
                                 <input type="text"
                                        class="form-control"
-                                       required="required"
                                        name="ShipAddress"
                                        maxlength="100"
                                        value="">
@@ -60,24 +73,28 @@
                         <div class="col-md-12">
                             <md-input-container>
                                 <label>訂購商品</label>
-                                <md-select name="UnitPrice" ng-model="UnitPrice">
-                                    <md-option value="200" selected>白素T</md-option>
-                                    <md-option value="250">黑素T</md-option>
-                                    <md-option value="300">LogoT</md-option>
+                                <md-select name="ProductID" ng-model="ProductID">
+                                    <md-option value="14" selected>豆腐</md-option>
+                                    <md-option value="16">巴甫洛娃蛋糕</md-option>
+                                    <md-option value="33">藍紋乳酪</md-option>
+                                    <md-option value="48">巧克力</md-option>
                                 </md-select>
                             </md-input-container>
                         </div>
+
                         <div class="col-md-12">
-                            <md-input-container class="md-block">
-                                <label>訂購數量</label>
-                                <input type="text"
-                                       class="form-control"
-                                       required="required"
-                                       name="Quantity"
-                                       maxlength="10"
-                                       value="">
+                            <md-input-container>
+                                <label>數量</label>
+                                <md-select name="Quantity" ng-model="Quantity">
+                                    <md-option value="1" selected>1</md-option>
+                                    <md-option value="2">2</md-option>
+                                    <md-option value="3">3</md-option>
+                                    <md-option value="4">4</md-option>
+                                    <md-option value="5">5</md-option>
+                                </md-select>
                             </md-input-container>
                         </div>
+
 
                         @*<div class="col-md-12">
             <md-input-container class="md-block">

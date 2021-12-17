@@ -89,11 +89,51 @@ public class AdoCommand
         //Console.ReadKey();
     }
 
+    public string GetUnitPriceByProductID(string ProductID)
+    {
+        ShaneDbUtil shaneDbUtil = new ShaneDbUtil(this.DBConnectionString);
+
+        string selSQL = @" Select UnitPrice From Products 
+                           Where ProductID = @ProductID ";
+
+        string UnitPrice = shaneDbUtil.ExecScalar(selSQL, new { ProductID });
+        return UnitPrice;
+    }
+
+    public string InsOrders(object createOrder)
+    {
+        ShaneDbUtil shaneDbUtil = new ShaneDbUtil(this.DBConnectionString);
+
+        string OrderID = string.Empty;
+        string insSQL = @" INSERT INTO [ORDERS] (CustomerID, OrderDate, ShipAddress, ShipCity)
+                           VALUES (@CustomerID, GETDATE(), @ShipAddress, @ShipCity)  
+                           SELECT TOP 1 OrderID FROM [ORDERS] WHERE CustomerID = @CustomerID ORDER BY OrderDate Desc ";
+
+        OrderID = shaneDbUtil.ExecScalar(insSQL, createOrder);
+
+        return OrderID;
+    }
+
+    public int InsOrdersDetails(string OrderID, string ProductID, string Quantity)
+    {
+        ShaneDbUtil shaneDbUtil = new ShaneDbUtil(this.DBConnectionString);
+
+        string insSQL = @"   INSERT INTO [Order Details] (OrderID,ProductID, UnitPrice, Quantity)
+                             VALUES (@OrderID, @ProductID, (SELECT UnitPrice FROM [Products] WHERE ProductID = @ProductID ), @Quantity) ";
+
+
+        var result = shaneDbUtil.Exec(insSQL, new { OrderID,  ProductID, Quantity });
+        return result;
+    }
+
+
     public List<VModel> GetOrderByOrderID<VModel>(string OrderID)
     {
-        List<VModel> result = new List<VModel>();
         ShaneDbUtil shaneDbUtil = new ShaneDbUtil(this.DBConnectionString);
-        string selSQL = "";
+
+        List<VModel> result = new List<VModel>();
+
+        string selSQL = "Insert In";
 
         result = shaneDbUtil.Exec<VModel>(selSQL, new { OrderID });
 
