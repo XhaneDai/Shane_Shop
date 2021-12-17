@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "ShoppingPage";
+    ViewBag.Title = "選購商品頁";
 }
 
 @section scripts
@@ -18,7 +18,7 @@
     <div class="panel panel-primary">
         <div class="panel-heading">
             <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapse">測試OPEN POINT交易</a>
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapse">選購商品</a>
             </h4>
         </div>
         <div id="collapse" class="panel-collapse collapse in">
@@ -26,18 +26,7 @@
 
                 <form class="form-horizontal" role="form" action="@Url.Action("CreateOrders", "Orders")" method="POST">
                     <div class="row">
-                        @*<div class="col-md-12">
-            <md-input-container class="md-block">
-                <label>會員ID</label>
-                <input type="text"
-                       class="form-control"
-                       required="required"
-                       name="CustomerID"
-                       maxlength="20"
-                       value="LAUGB"
-                       disabled="disabled">
-            </md-input-container>
-        </div>*@
+
                         <div class="col-md-12">
                             <md-input-container class="md-block">
                                 <label>會員ID</label>
@@ -47,7 +36,7 @@
                                        name="CustomerID"
                                        maxlength="20"
                                        value="LAUGB"
-                              />
+                                       readonly="readonly" />
                             </md-input-container>
                         </div>
                         <div class="col-md-12">
@@ -74,10 +63,10 @@
                             <md-input-container>
                                 <label>訂購商品</label>
                                 <md-select name="ProductID" ng-model="ProductID">
-                                    <md-option value="14" selected>豆腐</md-option>
-                                    <md-option value="16">巴甫洛娃蛋糕</md-option>
-                                    <md-option value="33">藍紋乳酪</md-option>
-                                    <md-option value="48">巧克力</md-option>
+                                    <md-option value="3" selected>Aniseed Syrup</md-option>
+                                    <md-option value="8">Northwoods Cranberry Sauce</md-option>
+                                    <md-option value="22">Gustaf's Knackebrod</md-option>
+                                    <md-option value="43">Ipoh Coffee</md-option>
                                 </md-select>
                             </md-input-container>
                         </div>
@@ -86,106 +75,14 @@
                             <md-input-container>
                                 <label>數量</label>
                                 <md-select name="Quantity" ng-model="Quantity">
-                                    <md-option value="1" selected>1</md-option>
-                                    <md-option value="2">2</md-option>
-                                    <md-option value="3">3</md-option>
-                                    <md-option value="4">4</md-option>
-                                    <md-option value="5">5</md-option>
+                                    <md-option value="10" selected>10</md-option>
+                                    <md-option value="20">20</md-option>
+                                    <md-option value="30">30</md-option>
+                                    <md-option value="40">40</md-option>
+                                    <md-option value="50">50</md-option>
                                 </md-select>
                             </md-input-container>
                         </div>
-
-
-                        @*<div class="col-md-12">
-            <md-input-container class="md-block">
-                <label>各系統的OP特店MerchantID</label>
-                <input type="text"
-                       class="form-control"
-                       required="required"
-                       name="MerchantID"
-                       maxlength="20"
-                       value="990231310">
-            </md-input-container>
-        </div>
-        <div class="col-md-12">
-            <md-input-container class="md-block">
-                <label>廠商訂單編號</label>
-                <input type="text"
-                       class="form-control"
-                       required="required"
-                       name="OrgOrderNumber"
-                       maxlength="20"
-                       value="@ViewData["merchantTradeNo"]">
-            </md-input-container>
-        </div>
-        <div class="col-md-12">
-            <md-input-container class="md-block">
-                <label>訂單金額</label>
-                <input type="text"
-                       class="form-control"
-                       required="required"
-                       name="Amount"
-                       value="100">
-            </md-input-container>
-        </div>
-        <div class="col-md-12">
-            <md-input-container>
-                <label>請款類型</label>
-                <md-select name="authParty" ng-model="authParty">
-                    <md-option value="OPW" selected>OPW</md-option>
-                    <md-option value="ICASH">ICASH</md-option>
-                </md-select>
-            </md-input-container>
-        </div>
-        <div class="col-md-12">
-            <md-input-container>
-                <label>支付模式</label>
-                <md-select name="entryMode" ng-model="entryMode">
-                    <md-option value="01">線下交易</md-option>
-                    <md-option value="02" selected>線上交易</md-option>
-                </md-select>
-            </md-input-container>
-        </div>
-        <div class="col-md-12">
-            <md-input-container class="md-block">
-                <label>交易名稱</label>
-                <input type="text"
-                       class="form-control"
-                       name="transName"
-                       required="required"
-                       value="測試交易名稱">
-            </md-input-container>
-        </div>
-        <div class="col-md-12">
-            <md-input-container class="md-block">
-                <label>商店名稱</label>
-                <input type="text"
-                       class="form-control"
-                       required="required"
-                       name="storeName"
-                       value="測試商店名稱">
-            </md-input-container>
-        </div>
-        <div class="col-md-12">
-            <md-input-container class="md-block">
-                <label>返回頁面網址</label>
-                <input type="text"
-                       class="form-control"
-                       required="required"
-                       name="redirectUrl"
-                       value="https://paydev.azurewebsites.net/Bank/SubSysCatch">
-            </md-input-container>
-        </div>
-        <div class="col-md-12">
-            <md-input-container class="md-block">
-                <label>返回資料網址</label>
-                <input type="text"
-                       class="form-control"
-                       required="required"
-                       name="CallBackUrl"
-                       value="https://paydev.azurewebsites.net/Bank/SubSysCatch">
-            </md-input-container>
-        </div>*@
                         <div class="col-md-12">
                             <button type="submit" class="btn btn-success">
                                 確定

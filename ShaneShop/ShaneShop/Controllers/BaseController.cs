@@ -11,5 +11,11 @@ namespace ShaneShop.Controllers
     {
         public static string SqlConnectString = ConfigurationUtility.GetAppSetting("SqlConnectString");
 
+
+        public ActionResult CreateFail()
+        {
+            return View();
+        }
+
     }
 }

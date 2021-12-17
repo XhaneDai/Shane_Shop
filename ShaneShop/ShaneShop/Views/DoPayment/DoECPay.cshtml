@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "DoECPay";
+}
+
+<html>
+<head>
+
+</head>
+
+<body>
+    <form id="__ecpayForm" method="post" action="@ViewBag.PostURL">
+        @foreach (var item in ViewBag.postData)
+        {
+            <input name="@item.Key" type="hidden" id="@item.Key" value="@item.Value" />
+        }
+
+        @*<input type="submit" value="Checkout sbumit" />*@
+    </form>
+    <script type="text/javascript">
+        document.getElementById("__ecpayForm").submit();
+    </script>
+
+
+</body>
+
+</html>

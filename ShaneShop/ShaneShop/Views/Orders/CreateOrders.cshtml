@@ -1,34 +1,157 @@
-﻿@model ShaneShop.RouteConfig
-
+﻿
 @{
-    ViewBag.Title = "CreateOrders";
+    ViewBag.Title = "訂單成立";
+    var TotalPrice = Model.UnitPrice * Model.Quantity;
 }
 
-<h2>CreateOrders</h2>
+@model ShaneShop.Models.Orders.OrderInfo
 
-
-@using (Html.BeginForm()) 
+@section scripts
 {
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>RouteConfig</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+    <script>
+        angular.module("MainApp", ["ngMaterial", "ngMessages"])
+            .controller("MainCtrl", ["$http", function ($http) {
+                common.log("angular");
+            }]);
+    </script>
+}
+
+<div ng-module="MainApp" ng-controller="MainCtrl as ctrl" style="padding-top: 50px">
+    <br />
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapse">訂單成立</a>
+            </h4>
+        </div>
+        <div id="collapse" class="panel-collapse collapse in">
+            <div class="panel-body">
+
+                <form class="form-horizontal" role="form" action="@Url.Action("DoECPay", "DoPayment")" method="POST">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <md-input-container class="md-block">
+                                <label>訂單編號</label>
+                                <input type="text"
+                                       class="form-control"
+                                       required="required"
+                                       name="CustomerID"
+                                       maxlength="5"
+                                       value="@Model.OrderID"
+                                       readonly="readonly" />
+                            </md-input-container>
+                        </div>
+                        <div class="col-md-12">
+                            <md-input-container class="md-block">
+                                <label>會員ID</label>
+                                <input type="text"
+                                       class="form-control"
+                                       required="required"
+                                       name="CustomerID"
+                                       maxlength="5"
+                                       value="@Model.CustomerID"
+                                       readonly="readonly" />
+                            </md-input-container>
+                        </div>
+                        <div class="col-md-12">
+                            <md-input-container class="md-block">
+                                <label>訂單成立時間</label>
+                                <input type="text"
+                                       class="form-control"
+                                       required="required"
+                                       name="CustomerID"
+                                       maxlength="20"
+                                       value="@Model.OrderDate"
+                                       readonly="readonly" />
+                            </md-input-container>
+                        </div>
+                        <div class="col-md-12">
+                            <md-input-container class="md-block">
+                                <label>寄送城市</label>
+                                <input type="text"
+                                       class="form-control"
+                                       name="ShipCity"
+                                       maxlength="20"
+                                       value="@Model.ShipCity"
+                                       readonly="readonly" />
+                            </md-input-container>
+                        </div>
+                        <div class="col-md-12">
+                            <md-input-container class="md-block">
+                                <label>寄送地址</label>
+                                <input type="text"
+                                       class="form-control"
+                                       name="ShipAddress"
+                                       maxlength="100"
+                                       value="@Model.ShipAddress"
+                                       readonly="readonly" />
+                            </md-input-container>
+                        </div>
+                        <div class="col-md-12">
+                            <md-input-container class="md-block">
+                                <label>商品名稱</label>
+                                <input type="text"
+                                       class="form-control"
+                                       name="ShipAddress"
+                                       maxlength="100"
+                                       value="@Model.ProductName"
+                                       readonly="readonly" />
+                            </md-input-container>
+                        </div>
+                        <div class="col-md-12">
+                            <md-input-container class="md-block">
+                                <label>單價</label>
+                                <input type="text"
+                                       class="form-control"
+                                       name="ShipAddress"
+                                       maxlength="100"
+                                       value="@Model.UnitPrice"
+                                       readonly="readonly" />
+                            </md-input-container>
+                        </div>
+                        <div class="col-md-12">
+                            <md-input-container class="md-block">
+                                <label>訂購數量</label>
+                                <input type="text"
+                                       class="form-control"
+                                       name="ShipAddress"
+                                       maxlength="100"
+                                       value="@Model.Quantity"
+                                       readonly="readonly" />
+                            </md-input-container>
+                        </div>
+                        <div class="col-md-12">
+                            <md-input-container class="md-block">
+                                <label>訂單金額</label>
+                                <input type="text"
+                                       class="form-control"
+                                       name="ShipAddress"
+                                       maxlength="100"
+                                       value="@TotalPrice"
+                                       readonly="readonly" />
+                            </md-input-container>
+                        </div>
+
+                        <div class="col-md-12">
+                            <md-input-container class="md-block">
+                                <label>訂單狀態</label>
+                                <input type="text"
+                                       class="form-control"
+                                       name="ShipAddress"
+                                       maxlength="100"
+                                       value="@Model.OrderStatus"
+                                       readonly="readonly" />
+                            </md-input-container>
+                        </div>
+
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-success">
+                                前往付款
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-
-
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

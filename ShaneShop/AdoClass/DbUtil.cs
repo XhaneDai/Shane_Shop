@@ -233,7 +233,7 @@ namespace AdoClass.DbUtil
             }
             catch (Exception ex)
             {
-                //insightsUtil.WriteLog(ex);
+                //紀錄Log Exception
             }
             return dt;
         }
@@ -260,7 +260,7 @@ namespace AdoClass.DbUtil
             }
             catch (Exception ex)
             {
-                //insightsUtil.WriteLog(ex);
+                //紀錄Log Exception
             }
             return dt;
         }

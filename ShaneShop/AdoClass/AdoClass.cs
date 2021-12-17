@@ -89,16 +89,27 @@ public class AdoCommand
         //Console.ReadKey();
     }
 
-    public string GetUnitPriceByProductID(string ProductID)
-    {
-        ShaneDbUtil shaneDbUtil = new ShaneDbUtil(this.DBConnectionString);
+    //public string GeOrderInfoByOrderID(string OrderID)
+    //{
+    //    ShaneDbUtil shaneDbUtil = new ShaneDbUtil(this.DBConnectionString);
 
-        string selSQL = @" Select UnitPrice From Products 
-                           Where ProductID = @ProductID ";
+    //    string selSQL = @" SELECT  OS.OrderID,
+    //                               OS.CustomerID,
+    //                               OS.OrderDate,
+    //                               OS.ShipAddress,
+    //                               OS.ShipCity,
+    //                               PS.ProductName,
+    //                               ODS.UnitPrice,
+    //                               ODS.Quantity
+    //                        FROM   [Orders] OS
+    //                               LEFT JOIN [Order Details] ODS
+    //                                      ON OS.OrderID = ODS.OrderID
+    //                               LEFT JOIN Products PS
+    //                                      ON ODS.ProductID = PS.ProductID  ";
 
-        string UnitPrice = shaneDbUtil.ExecScalar(selSQL, new { ProductID });
-        return UnitPrice;
-    }
+    //    string UnitPrice = shaneDbUtil.ExecSp<VModel>(selSQL, new { OrderID });
+    //    return UnitPrice;
+    //}
 
     public string InsOrders(object createOrder)
     {
@@ -122,7 +133,7 @@ public class AdoCommand
                              VALUES (@OrderID, @ProductID, (SELECT UnitPrice FROM [Products] WHERE ProductID = @ProductID ), @Quantity) ";
 
 
-        var result = shaneDbUtil.Exec(insSQL, new { OrderID,  ProductID, Quantity });
+        var result = shaneDbUtil.Exec(insSQL, new { OrderID, ProductID, Quantity });
         return result;
     }
 
@@ -133,10 +144,23 @@ public class AdoCommand
 
         List<VModel> result = new List<VModel>();
 
-        string selSQL = "Insert In";
+        string selSQL = @" SELECT  OS.OrderID,
+                                   OS.CustomerID,
+                                   OS.OrderDate,
+                                   OS.ShipAddress,
+                                   OS.ShipCity,
+                                   PS.ProductName,
+                                   ODS.UnitPrice,
+                                   ODS.Quantity,
+                                   OS.OrderStatus
+                            FROM   [Orders] OS
+                                   LEFT JOIN [Order Details] ODS
+                                          ON OS.OrderID = ODS.OrderID
+                                   LEFT JOIN Products PS
+                                          ON ODS.ProductID = PS.ProductID 
+                            WHERE  OS.OrderID = @OrderID  ";
 
         result = shaneDbUtil.Exec<VModel>(selSQL, new { OrderID });
-
 
         return result;
     }

@@ -11,7 +11,6 @@ namespace ShaneShop.Controllers
 {
     public class OrdersController : BaseController
     {
-
         public ActionResult ShoppingPage()
         {
 
@@ -19,13 +18,6 @@ namespace ShaneShop.Controllers
         }
 
 
-        [HttpPost]
-        public ActionResult Index()
-        {
-
-
-            return View();
-        }
 
         public ActionResult CreateOrders(CreateOrder createOrder)
         {
@@ -33,12 +25,26 @@ namespace ShaneShop.Controllers
 
             //新增訂單主檔
             var OrderID = adoCommand.InsOrders(createOrder);
-
             //新增訂單明細
-            var createResult = adoCommand.InsOrdersDetails(OrderID, createOrder.ProductID, createOrder.Quantity);
+            int createResult = adoCommand.InsOrdersDetails(OrderID, createOrder.ProductID, createOrder.Quantity);
 
+            if (createResult != 0)
+            {
+                var orderInfo = adoCommand.GetOrderByOrderID<OrderInfo>(OrderID);
+                if (orderInfo.Count > 0)
+                {
+                    return View(orderInfo[0]);
+                }
+                else
+                {
+                    return RedirectToAction("CreateFail", "Base");
+                }
+            }
+            else
+            {
+                return RedirectToAction("CreateFail", "Base");
+            }
 
-            return View();
         }
 
     }
