@@ -46,8 +46,7 @@ namespace AdoClass.DbUtil
             }
             catch (Exception ex)
             {
-                //insightsUtil.WriteLog(sql, "Exec");
-                //insightsUtil.WriteLog(ex);
+                //Write Log
             }
             return count;
         }
@@ -80,7 +79,7 @@ namespace AdoClass.DbUtil
             }
             catch (Exception ex)
             {
-                //insightsUtil.WriteLog(ex);
+                //Write Log
             }
             return OnlyItem;
         }
@@ -123,7 +122,7 @@ namespace AdoClass.DbUtil
             }
             catch (Exception ex)
             {
-                //insightsUtil.WriteLog(ex);
+                //Write Log
             }
             return result;
         }

@@ -171,7 +171,5 @@ D:\Shane_Shop\ShaneShop\ShaneShop\obj\Debug\ShaneShop.csproj.CopyComplete
 D:\Shane_Shop\ShaneShop\ShaneShop\obj\Debug\ShaneShop.dll
 D:\Shane_Shop\ShaneShop\ShaneShop\obj\Debug\ShaneShop.pdb
 D:\Shane_Shop\ShaneShop\ShaneShop\bin\SqlCommandDemo.exe
-D:\Shane_Shop\ShaneShop\ShaneShop\bin\nunit.framework.dll
 D:\Shane_Shop\ShaneShop\ShaneShop\bin\SqlCommandDemo.pdb
 D:\Shane_Shop\ShaneShop\ShaneShop\bin\SqlCommandDemo.exe.config
-D:\Shane_Shop\ShaneShop\ShaneShop\bin\nunit.framework.xml

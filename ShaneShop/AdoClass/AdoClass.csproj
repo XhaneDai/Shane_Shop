@@ -56,7 +56,6 @@
   <ItemGroup>
     <Compile Include="AdoClass.cs" />
     <Compile Include="DbUtil.cs" />
-    <Compile Include="TestClass.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
