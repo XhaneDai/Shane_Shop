@@ -7,8 +7,36 @@ using System.Web;
 
 namespace ShaneShop.Models.Util
 {
+
+
     public class Operation
     {
+        /// <summary>
+        /// 取得交易狀態中文對應
+        /// </summary>
+        /// <param name="OrderStatusEN"></param>
+        /// <returns></returns>
+        public static string GetOrderStatusInCH(string OrderStatusEN)
+        {
+            string OrderStatusCH = string.Empty;
+            switch (OrderStatusEN)
+            {
+                case "CreatePay":
+                    OrderStatusCH = "訂單成立";
+                    break;
+                case "Approved":
+                    OrderStatusCH = "付款成功";
+                    break;
+                case "Failed":
+                    OrderStatusCH = "付款失敗";
+                    break;
+                default:
+                    OrderStatusCH = "付款狀態異常";
+                    break;
+            }
+            return OrderStatusCH;
+        }
+
         /// <summary>
         /// 綠界檢查碼加密規則
         /// </summary>

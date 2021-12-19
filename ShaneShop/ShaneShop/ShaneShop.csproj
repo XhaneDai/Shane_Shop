@@ -126,7 +126,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Orders\CreateOrder.cs" />
-    <Compile Include="Models\Orders\DoPaymentController.cs" />
+    <Compile Include="Controllers\DoPaymentController.cs" />
     <Compile Include="Models\Orders\OrderInfo.cs" />
     <Compile Include="Models\Util\ConfigurationUtility.cs" />
     <Compile Include="Models\Util\Operation.cs" />
@@ -177,11 +177,13 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Orders\Index.cshtml" />
-    <Content Include="Views\Orders\CreateOrders.cshtml" />
+    <Content Include="Views\Orders\CreateOrder.cshtml" />
     <Content Include="Views\Orders\ShoppingPage.cshtml" />
     <Content Include="Views\Base\CreateFail.cshtml" />
     <Content Include="Views\DoPayment\DoECPay.cshtml" />
+    <Content Include="Views\Orders\OrderPayResult.cshtml" />
+    <Content Include="Views\Orders\QueryOrder.cshtml" />
+    <Content Include="Views\Orders\QueryOrderByOrderID.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

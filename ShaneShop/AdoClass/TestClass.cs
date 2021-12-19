@@ -11,44 +11,44 @@ using System.Data.SqlClient;
    public class TestClass
     {
 
-    [Test]
-    public void checkIfMinOfItemsWorks()
-    {
-        AdoCommand scd = new AdoCommand();
-        int minOfItems = scd.GetMinOfItems();
-        int expectedResult = 45;
-        Assert.AreEqual(minOfItems, expectedResult);
-    }
+    //[Test]
+    //public void checkIfMinOfItemsWorks()
+    //{
+    //    AdoCommand scd = new AdoCommand();
+    //    int minOfItems = scd.GetMinOfItems();
+    //    int expectedResult = 45;
+    //    Assert.AreEqual(minOfItems, expectedResult);
+    //}
 
-    [Test]
-    public void checkIfMaxOfItemsWorks()
-    {
-        AdoCommand scd = new AdoCommand();
-        int maxOfItems = scd.GetMaxOfItems();
-        int expectedResult = 100;
-        Assert.AreEqual(maxOfItems, expectedResult);
-    }
-
-
+    //[Test]
+    //public void checkIfMaxOfItemsWorks()
+    //{
+    //    AdoCommand scd = new AdoCommand();
+    //    int maxOfItems = scd.GetMaxOfItems();
+    //    int expectedResult = 100;
+    //    Assert.AreEqual(maxOfItems, expectedResult);
+    //}
 
 
-    [Test]
-    public void checkIfCountRecordsWorks()
-    {
-        AdoCommand scd = new AdoCommand();
-        int numberOfRecords = scd.GetNumberOfRecords();
-        int expectedResult = 11;
-        Assert.AreEqual(numberOfRecords, expectedResult);
-    }
 
-    [Test]
-        public void checkIfMeanOfItemsWorks()
-        {
-        AdoCommand scd = new AdoCommand();
-        int meanOfItems = scd.GetmeanOfItems();
-        int expectedResult = 80;
-        Assert.AreEqual(meanOfItems, expectedResult);
-        }
+
+    //[Test]
+    //public void checkIfCountRecordsWorks()
+    //{
+    //    AdoCommand scd = new AdoCommand();
+    //    int numberOfRecords = scd.GetNumberOfRecords();
+    //    int expectedResult = 11;
+    //    Assert.AreEqual(numberOfRecords, expectedResult);
+    //}
+
+    //[Test]
+    //    public void checkIfMeanOfItemsWorks()
+    //    {
+    //    AdoCommand scd = new AdoCommand();
+    //    int meanOfItems = scd.GetmeanOfItems();
+    //    int expectedResult = 80;
+    //    Assert.AreEqual(meanOfItems, expectedResult);
+    //    }
 
     [Test]
     public void checkInsertRecordsWorks()

@@ -47,7 +47,6 @@ namespace ShaneShop.Models.Orders
         /// </summary>
         public int Quantity { get; set; }
 
-
         /// <summary>
         /// 訂單狀態
         /// </summary>

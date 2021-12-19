@@ -1,8 +1,10 @@
 ﻿
 @{
-    ViewBag.Title = "訂單成立";
+    ViewBag.Title = "QueryOrder";
     var TotalPrice = Model.UnitPrice * Model.Quantity;
 }
+
+<h2>QueryOrder</h2>
 
 @model ShaneShop.Models.Orders.OrderInfo
 
@@ -21,13 +23,13 @@
     <div class="panel panel-primary">
         <div class="panel-heading">
             <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapse">訂單成立</a>
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapse">訂單查詢</a>
             </h4>
         </div>
         <div id="collapse" class="panel-collapse collapse in">
             <div class="panel-body">
 
-                <form class="form-horizontal" role="form" action="@Url.Action("DoECPay", "DoPayment")" method="POST">
+                <form class="form-horizontal" role="form" action="@Url.Action("UpdateOrder", "Orders")" method="POST">
                     <div class="row">
                         <div class="col-md-12">
                             <md-input-container class="md-block">
@@ -35,7 +37,7 @@
                                 <input type="text"
                                        class="form-control"
                                        required="required"
-                                       name="CustomerID"
+                                       name="OrderID"
                                        maxlength="5"
                                        value="@Model.OrderID"
                                        readonly="readonly" />
@@ -59,7 +61,7 @@
                                 <input type="text"
                                        class="form-control"
                                        required="required"
-                                       name="CustomerID"
+                                       name="OrderDate"
                                        maxlength="20"
                                        value="@Model.OrderDate"
                                        readonly="readonly" />
@@ -72,8 +74,7 @@
                                        class="form-control"
                                        name="ShipCity"
                                        maxlength="20"
-                                       value="@Model.ShipCity"
-                                       readonly="readonly" />
+                                       value="@Model.ShipCity" />
                             </md-input-container>
                         </div>
                         <div class="col-md-12">
@@ -83,8 +84,7 @@
                                        class="form-control"
                                        name="ShipAddress"
                                        maxlength="100"
-                                       value="@Model.ShipAddress"
-                                       readonly="readonly" />
+                                       value="@Model.ShipAddress" />
                             </md-input-container>
                         </div>
                         <div class="col-md-12">
@@ -92,7 +92,7 @@
                                 <label>商品名稱</label>
                                 <input type="text"
                                        class="form-control"
-                                       name="ShipAddress"
+                                       name="ProductName"
                                        maxlength="100"
                                        value="@Model.ProductName"
                                        readonly="readonly" />
@@ -100,10 +100,10 @@
                         </div>
                         <div class="col-md-12">
                             <md-input-container class="md-block">
-                                <label>單價</label>
+                                <label>商品單價</label>
                                 <input type="text"
                                        class="form-control"
-                                       name="ShipAddress"
+                                       name="UnitPrice"
                                        maxlength="100"
                                        value="@Model.UnitPrice"
                                        readonly="readonly" />
@@ -114,7 +114,7 @@
                                 <label>訂購數量</label>
                                 <input type="text"
                                        class="form-control"
-                                       name="ShipAddress"
+                                       name="Quantity"
                                        maxlength="100"
                                        value="@Model.Quantity"
                                        readonly="readonly" />
@@ -125,7 +125,7 @@
                                 <label>訂單金額</label>
                                 <input type="text"
                                        class="form-control"
-                                       name="ShipAddress"
+                                       name="TotalPrice"
                                        maxlength="100"
                                        value="@TotalPrice"
                                        readonly="readonly" />
@@ -137,7 +137,7 @@
                                 <label>訂單狀態</label>
                                 <input type="text"
                                        class="form-control"
-                                       name="ShipAddress"
+                                       name="OrderStatus"
                                        maxlength="100"
                                        value="@Model.OrderStatus"
                                        readonly="readonly" />
@@ -146,11 +146,16 @@
 
                         <div class="col-md-12">
                             <button type="submit" class="btn btn-success">
-                                前往付款
+                                更新訂單資訊
                             </button>
                         </div>
                     </div>
                 </form>
+                <div class="col-md-12">
+                    <button class="" onclick="location.href='DeleteOrder?OrderID=@Model.OrderID'">
+                        刪除訂單
+                    </button>
+                </div>
             </div>
         </div>
     </div>

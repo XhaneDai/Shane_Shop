@@ -3,26 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ShaneShop.Controllers;
 using ShaneShop.Models.Util;
 
 
 namespace ShaneShop.Models.Orders
 {
-    public class DoPaymentController : Controller
+    public class DoPaymentController : BaseController
     {
         public ActionResult DoECPay(OrderInfo orderInfo)
         {
 
-            var ReturnURL = Url.Action("SuccessPage", "Sponsor", null, "https");
-            // 客戶點返回的時候的 連結
-            var ClientBackURL = Url.Action("Index", "Sponsor", null, "https");
-            // 付款完成的返回連結, 建議先空白
-            var OrderResultURL = Url.Action("SuccessPage", "Sponsor", null, "https");
-            ////// 綠界Server 付款方式確認時 Call 的網址, 會給付款方式的資訊
-            ////var PaymentInfoURL = Url.Action("Index", "Sponsor", null, "https"); ;
+            var ReturnURL = Url.Action("Index", "Orders", null, "https"); // 客戶點返回的時候的連結 這邊沒用到，先隨便填
+            var ClientBackURL = Url.Action("Index", "Orders", null, "https");// 付款完成的返回連結, 這邊沒用到，先隨便填
+            var OrderResultURL = Url.Action("OrderPayResult", "Orders", null, "https");
 
             var postData = new Dictionary<string, string>();
-
             var EcpayHashKey = ConfigurationUtility.GetAppSetting("EcpayHashKey");
             var EcpayHashIV = ConfigurationUtility.GetAppSetting("EcpayHashIV");
 
@@ -32,10 +28,7 @@ namespace ShaneShop.Models.Orders
             postData.Add("ClientBackURL", ClientBackURL); //瀏覽器端返回的廠商網址
             postData.Add("OrderResultURL", OrderResultURL); //瀏覽器端回傳付款結果網址
 
-            ////postData.Add("PaymentInfoURL", PaymentInfoURL); //瀏覽器端回傳付款結果網址
-
-            //postData.Add("MerchantTradeNo", DateTimeOffset.Now.ToOffset(new TimeSpan(8, 0, 0)).ToUnixTimeSeconds().ToString()); // new Random().Next(0, 99).ToString());//廠商的交易編號);
-            postData.Add("MerchantTradeNo", $"ShaneShop{orderInfo.OrderID}"); //這邊有點偷吃步，因為NorthWind的訂單編號格式太容易重複，所以加上ShaneShop與他人區隔;
+            postData.Add("MerchantTradeNo", $"ShaneShop{DateTime.Now:MMdd}{orderInfo.OrderID}"); //這邊有點偷吃步，因為NorthWind的訂單編號格式太容易重複，所以加上ShaneShop與他人區隔;
 
             postData.Add("MerchantTradeDate", orderInfo.OrderDate.ToString("yyyy/MM/dd HH:mm:ss"));
 

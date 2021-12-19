@@ -22,95 +22,11 @@ public class AdoCommand
         this.DBConnectionString = DBConnectionString;
     }
 
-    // call methods that demo SqlCommand capabilities
     static void Main()
     {
-        //SqlCommandDemo scd = new SqlCommandDemo();
-
-        //Console.WriteLine();
-        //Console.WriteLine("Customers Before Insert");
-        //Console.WriteLine("------------------------");
-        //Console.ReadKey();
-        //// use ExecuteReader method
-        //scd.ReadData();
-
-        ////Insert method 
-        //scd.Insertdata();
-        //Console.WriteLine();
-        //Console.WriteLine("Customers After Insert");
-        //Console.WriteLine("------------------------------");
-        //Console.ReadKey();
-        //scd.ReadData();
-
-        //// Update method
-        //scd.UpdateData();
-
-        //Console.WriteLine();
-        //Console.WriteLine("Customers After Update");
-        //Console.WriteLine("------------------------------");
-        //Console.ReadKey();
-        //scd.ReadData();
-
-        ////Delete method 
-        //scd.DeleteData();
-
-        //Console.WriteLine();
-        //Console.WriteLine("Customers After Delete");
-        //Console.WriteLine("------------------------------");
-        //Console.ReadKey();
-        //scd.ReadData();
-
-        //// use Count method
-        //int numberOfRecords = scd.GetNumberOfRecords();
-        //Console.ReadKey();
-        //Console.WriteLine();
-        //Console.WriteLine("Number of Records: {0}", numberOfRecords);
-        //Console.ReadKey();
-
-        //// use Count method
-        //int meanOfItems = scd.GetmeanOfItems();
-        //Console.ReadKey();
-        //Console.WriteLine();
-        //Console.WriteLine("Mean Of Shopping Basket: {0}c", meanOfItems);
-        //Console.ReadKey();
-
-        //// use Min method
-        //int minOfItems = scd.GetMinOfItems();
-        //Console.ReadKey();
-        //Console.WriteLine();
-        //Console.WriteLine("Minimum Price Of Shopping Basket: {0}c", minOfItems);
-        //Console.ReadKey();
-
-        //// use Max method
-        //int maxOfItems = scd.GetMaxOfItems();
-        //Console.ReadKey();
-        //Console.WriteLine();
-        //Console.WriteLine("Maximum Price Of Shopping Basket: {0}c", maxOfItems);
-        //Console.ReadKey();
     }
 
-    //public string GeOrderInfoByOrderID(string OrderID)
-    //{
-    //    ShaneDbUtil shaneDbUtil = new ShaneDbUtil(this.DBConnectionString);
-
-    //    string selSQL = @" SELECT  OS.OrderID,
-    //                               OS.CustomerID,
-    //                               OS.OrderDate,
-    //                               OS.ShipAddress,
-    //                               OS.ShipCity,
-    //                               PS.ProductName,
-    //                               ODS.UnitPrice,
-    //                               ODS.Quantity
-    //                        FROM   [Orders] OS
-    //                               LEFT JOIN [Order Details] ODS
-    //                                      ON OS.OrderID = ODS.OrderID
-    //                               LEFT JOIN Products PS
-    //                                      ON ODS.ProductID = PS.ProductID  ";
-
-    //    string UnitPrice = shaneDbUtil.ExecSp<VModel>(selSQL, new { OrderID });
-    //    return UnitPrice;
-    //}
-
+    #region 新增訂單
     public string InsOrders(object createOrder)
     {
         ShaneDbUtil shaneDbUtil = new ShaneDbUtil(this.DBConnectionString);
@@ -136,8 +52,16 @@ public class AdoCommand
         var result = shaneDbUtil.Exec(insSQL, new { OrderID, ProductID, Quantity });
         return result;
     }
+    #endregion
 
+    #region 訂單控制類
 
+    /// <summary>
+    /// 查詢訂單
+    /// </summary>
+    /// <typeparam name="VModel"></typeparam>
+    /// <param name="OrderID"></param>
+    /// <returns></returns>
     public List<VModel> GetOrderByOrderID<VModel>(string OrderID)
     {
         ShaneDbUtil shaneDbUtil = new ShaneDbUtil(this.DBConnectionString);
@@ -165,260 +89,85 @@ public class AdoCommand
         return result;
     }
 
-
-    //Read Data
-    public void ReadData()
+    /// <summary>
+    /// 修改訂單內容
+    /// </summary>
+    /// <typeparam name="VModel"></typeparam>
+    /// <param name="OrderID"></param>
+    /// <returns></returns>
+    public int UpdOrderWithOrderInfo(string OrderID, string ShipCity, string ShipAddress)
     {
-        SqlDataReader rdr = null;
+        ShaneDbUtil shaneDbUtil = new ShaneDbUtil(this.DBConnectionString);
 
-        try
-        {
-            // Open the connection
-            conn.Open();
+        string updSQL = @" UPDATE [Orders]
+                              SET ShipCity = @ShipCity,
+                                  ShipAddress = @ShipAddress
+                            WHERE OrderID = @OrderID ";
 
-            // 1. Instantiate a new command with a query and connection
-            SqlCommand cmd = new SqlCommand("select * from Customers", conn);
 
-            // 2. Call Execute reader to get query results
-            rdr = cmd.ExecuteReader();
+        int result = shaneDbUtil.Exec(updSQL, new { OrderID, ShipCity, ShipAddress });
 
-            // print the records
-            {
-                Console.WriteLine("Customer ID\tName\tPhone Number\t\t");
-                while (rdr.Read())
-                {
-                    Console.WriteLine(String.Format("{0} \t | {1}   |{2} \t",
-                        rdr[0], rdr[1], rdr[2]));
-                }
-            }
-        }
-        finally
-        {
-            // close the reader
-            if (rdr != null)
-            {
-                rdr.Close();
-            }
-
-            // Close the connection
-            if (conn != null)
-            {
-                conn.Close();
-            }
-        }
+        return result;
     }
 
-    //Insert command
-    public void Insertdata()
+    /// <summary>
+    /// 刪除訂單
+    /// </summary>
+    /// <param name="OrderID"></param>
+    /// <returns></returns>
+    public int DelOrder(string OrderID)
     {
-        try
-        {
-            // Open the connection
-            conn.Open();
+        ShaneDbUtil shaneDbUtil = new ShaneDbUtil(this.DBConnectionString);
 
-            // prepare command string
-            string insertString = @"
-                 insert into Customers
-                 (ID,Name, PhoneNo)
-                 values (123234345,'John', 034535382)";
+        string updSQL = @" DELETE FROM [Order Details]
+                            WHERE OrderID = @OrderID
+                            DELETE FROM [Orders]
+                            WHERE OrderID = @OrderID ";
 
-            // 1. Instantiate a new command with a query and connection
-            SqlCommand cmd = new SqlCommand(insertString, conn);
+        int updResult = shaneDbUtil.Exec(updSQL, new { OrderID });
+        return updResult;
+    }
+    #endregion
 
-            // 2. Call ExecuteNonQuery to send command
-            cmd.ExecuteNonQuery();
-        }
-        finally
-        {
-            // Close the connection
-            if (conn != null)
-            {
-                conn.Close();
-            }
-        }
+
+    #region 其他類
+    /// <summary>
+    /// 依據交易結果回壓訂單主檔狀態
+    /// </summary>
+    /// <param name="OrderID"></param>
+    /// <param name="OrderStatus"></param>
+    /// <returns></returns>
+    public int UpdOrderStatusByRtnCode(string OrderID, string OrderStatus)
+    {
+        ShaneDbUtil shaneDbUtil = new ShaneDbUtil(this.DBConnectionString);
+
+        string updSQL = @"  UPDATE Orders
+                            SET OrderStatus = @OrderStatus
+                            WHERE OrderID= @OrderID  ";
+
+        int updResult = shaneDbUtil.Exec(updSQL, new { OrderID, OrderStatus });
+        return updResult;
     }
 
-    //Update Command
-    public void UpdateData()
+    /// <summary>
+    /// 新增歷史訂單主檔
+    /// </summary>
+    /// <typeparam name="VModel"></typeparam>
+    /// <param name="OrderID"></param>
+    /// <returns></returns>
+    public string InsOrdersHistory(object createOrder)
     {
-        try
-        {
-            // Open the connection
-            conn.Open();
 
-            // prepare command string
-            string updateString = @"
-                update Customers
-                set Name = 'Other'
-                where Name = 'John'";
+        ShaneDbUtil shaneDbUtil = new ShaneDbUtil(this.DBConnectionString);
 
-            // 1. Instantiate a new command with command text only
-            SqlCommand cmd = new SqlCommand(updateString);
+        string OrderID = string.Empty;
+        string insSQL = @" INSERT INTO [ORDERSHISTORY] (OrderID, CustomerID, OrderDate, ShipAddress, ShipCity)
+                           VALUES (@OrderID, @CustomerID, GETDATE(), @ShipAddress, @ShipCity)  
+                           SELECT TOP 1 OrderID FROM [ORDERSHISTORY] WHERE OrderID = @OrderID  ";
 
-            // 2. Set the Connection property
-            cmd.Connection = conn;
+        OrderID = shaneDbUtil.ExecScalar(insSQL, createOrder);
 
-            // 3. Call ExecuteNonQuery to send command
-            cmd.ExecuteNonQuery();
-        }
-        finally
-        {
-            // Close the connection
-            if (conn != null)
-            {
-                conn.Close();
-            }
-        }
+        return OrderID;
     }
-
-
-    // Delete Command
-
-    public void DeleteData()
-    {
-        try
-        {
-            // Open the connection
-            conn.Open();
-
-            // prepare command string
-            string deleteString = @"
-                 delete from Customers
-                 where Name = 'Other'";
-
-            // 1. Instantiate a new command
-            SqlCommand cmd = new SqlCommand();
-
-            // 2. Set the CommandText property
-            cmd.CommandText = deleteString;
-
-            // 3. Set the Connection property
-            cmd.Connection = conn;
-
-            // 4. Call ExecuteNonQuery to send command
-            cmd.ExecuteNonQuery();
-        }
-        finally
-        {
-            // Close the connection
-            if (conn != null)
-            {
-                conn.Close();
-            }
-        }
-    }
-
-    //Count number of records 
-    public int GetNumberOfRecords()
-    {
-        int count = -1;
-
-        try
-        {
-            // Open the connection
-            conn.Open();
-
-            // 1. Instantiate a new command
-            SqlCommand cmd = new SqlCommand("select count(*) from Customers", conn);
-
-            // 2. Call ExecuteScalar to send command
-            count = (int)cmd.ExecuteScalar();
-        }
-        finally
-        {
-            // Close the connection
-            if (conn != null)
-            {
-                conn.Close();
-            }
-        }
-        return count;
-    }
-
-    public int GetmeanOfItems()
-    {
-        int mean;
-
-        try
-        {
-            // Open the connection
-            conn.Open();
-
-            // 1. Instantiate a new command
-            SqlCommand cmd = new SqlCommand("SELECT AVG(Price) AS PriceAverage FROM groceryBasket", conn);
-
-
-
-            // 2. Call ExecuteScalar to send command
-            mean = (int)cmd.ExecuteScalar();
-
-        }
-        finally
-        {
-            // Close the connection
-            if (conn != null)
-            {
-                conn.Close();
-            }
-        }
-        return mean;
-    }
-
-    public int GetMinOfItems()
-    {
-        int min;
-
-        try
-        {
-            // Open the connection
-            conn.Open();
-
-            // 1. Instantiate a new command
-            SqlCommand cmd = new SqlCommand("SELECT MIN(Price) AS PriceAverage FROM groceryBasket", conn);
-
-
-
-            // 2. Call ExecuteScalar to send command
-            min = (int)cmd.ExecuteScalar();
-
-        }
-        finally
-        {
-            // Close the connection
-            if (conn != null)
-            {
-                conn.Close();
-            }
-        }
-        return min;
-    }
-
-    public int GetMaxOfItems()
-    {
-        int max;
-
-        try
-        {
-            // Open the connection
-            conn.Open();
-
-            // 1. Instantiate a new command
-            SqlCommand cmd = new SqlCommand("SELECT MAX(Price) AS PriceAverage FROM groceryBasket", conn);
-
-
-
-            // 2. Call ExecuteScalar to send command
-            max = (int)cmd.ExecuteScalar();
-
-        }
-        finally
-        {
-            // Close the connection
-            if (conn != null)
-            {
-                conn.Close();
-            }
-        }
-        return max;
-    }
+    #endregion
 }
